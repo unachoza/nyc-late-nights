@@ -1,11 +1,19 @@
 //@ts-nocheck
-import React from "react";
+import React, { useState } from "react";
 import "./form.styles.css";
 
 const Form = () => {
-  const handleClick = (e) => {
-    console.log("clicked", e.target.value);
+  const [time, setTime] = useState([]);
+
+  const handleClick: React.MouseEventHandler<HTMLButtonElement> = (e: MouseEvent) => {
+    const { value } = e.target;
+    if (time.includes(value)) {
+      setTime((time) => time.filter((hour) => hour !== value));
+    } else {
+      setTime((time) => [...time, e.target.value]);
+    }
   };
+
   return (
     <div>
       Use this form
